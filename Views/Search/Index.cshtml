@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Search for Term";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search for term: @ViewData["SearchTerm"]</h1>
+
+<p>Please enter text to search below:</p>
+<textarea rows="4" style="width: 600px;" oninput="UpdateSearchResults();" id="txtSearch"></textarea>
+<br />
+<p>Matching results: </p> 
+<div id="divResults">0</div>
+
+<script>
+    function UpdateSearchResults() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("GetPossibleInstancesOfTerm", "Search")',
+            data: {
+                searchText: $("#txtSearch").val(),
+                searchTerm: '@ViewData["SearchTerm"]',
+            },
+            success: function (result) {
+                $("#divResults").html(result);
+            },
+            error: function (result) {
+                console.log("Error occurred when retrieving number of results: " + result);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="centered">
+    <a asp-controller="Search" asp-action="Index" asp-route-searchTerm="flight">
+        <input type="button" value="Search for flight" style="width:300px; height:185px;" />
+    </a>
+</div>
